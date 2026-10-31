@@ -2,17 +2,28 @@
   "name": "project-ieq-cachoeira",
   "version": "0.1.0",
   "private": true,
+  "main": "src/server.js",
   "dependencies": {
     "@neon/config": "^1.8.3",
     "@neon/env": "^1.4.8",
+    "@prisma/client": "^5.22.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "build": "prisma generate",
+    "test": "node --test test/app.test.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy",
+    "prisma:validate": "prisma validate"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
   }
 }
