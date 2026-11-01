@@ -1,27 +1,36 @@
-# IEQ Cachoeira API
+# IEQ Cachoeira
 
-API HTTP da aplicação IEQ Cachoeira, construída com Express, Prisma e PostgreSQL.
+Painel web de gestão e cuidado da comunidade, desenvolvido com React e Create React App.
 
-## Configuração local
+## Executar localmente
 
-1. Instale as dependências: `npm install`.
-2. Copie `.env.example` para `.env` e informe a `DATABASE_URL` do PostgreSQL.
-3. Crie as tabelas e gere o Prisma Client:
+Na raiz do repositório:
 
-   ```sh
-   npx prisma migrate deploy
-   npx prisma generate
-   ```
+```powershell
+npm install
+Copy-Item .env.example .env
+npm start
+```
 
-4. Inicie o servidor com `npm start` (porta `10000` por padrão; use `PORT` para substituí-la).
+O arquivo `.env.example` define `VITE_API_URL`. O script de desenvolvimento/build adapta essa variável ao formato `REACT_APP_API_URL` exigido pelo Create React App. Também é possível definir `REACT_APP_API_URL` diretamente.
 
-Use `npm run dev` durante o desenvolvimento, `npm test` para executar os testes HTTP e `npm run prisma:validate` para validar o schema.
+## API
 
-## Endpoints
+O backend Express/Prisma fica na pasta `projectieqcachoeira`, em um repositório Git separado. Para executá-lo localmente:
 
-- `GET /events` — eventos em ordem crescente de data.
-- `POST /events` — cria um evento com `title`, `date` e `location`.
-- `GET /activities` — até 10 atividades, da mais recente para a mais antiga.
-- `POST /activities` — cria uma atividade com `description` e `timeAgo`.
+```powershell
+Set-Location .\projectieqcachoeira
+npm install
+npm start
+```
 
-Os endpoints de criação validam os campos obrigatórios e respondem com `400` quando os dados são inválidos. Erros de banco são registrados pelo servidor e respondidos com `500`.
+A URL padrão da API é `https://backend-projectieqcachoeira.onrender.com`.
+
+No Render, publique o frontend como Static Site a partir deste repositório, com `npm install && npm run build` como comando de build e `build` como diretório de publicação. O backend é publicado a partir do repositório `backend-projectieqcachoeira`, com `npm install && npm run build` e `npm start`.
+
+## Verificação
+
+```powershell
+npm test -- --watchAll=false
+npm run build
+```
